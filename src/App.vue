@@ -30,15 +30,15 @@
               <a class="button is-primary">
                 <strong>Sign up</strong>
               </a>
-              <router-link tag="a" class="button is-light" to="login">
-                Log in
-              </router-link>
+              <b-login-btn></b-login-btn>
+<!--              <router-link tag="a" class="button is-light" to="login">-->
+<!--                Log in-->
+<!--              </router-link>-->
             </div>
           </b-navbar-item>
         </template>
       </b-navbar>
     </template>
-    <router-view></router-view>
   </div>
 </template>
 

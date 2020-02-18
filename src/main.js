@@ -8,11 +8,12 @@ import 'buefy/dist/buefy.css'
 import Navbar from './components/Navbar'
 import NavbarItem from './components/NavbarItem'
 import NavbarDropdown from './components/NavbarDropdown'
-import Login from './components/Login'
+import LoginBtn from './components/LoginBtn'
 
 Vue.config.productionTip = false
 
 Vue.use(Buefy)
+Vue.component('b-login-btn', LoginBtn)
 
 new Vue({
   router,
@@ -21,7 +22,7 @@ new Vue({
   components: {
     'b-navbar': Navbar,
     'b-navbar-item': NavbarItem,
-    'b-navbar-dropdown': NavbarDropdown,
-    'b-login': Login
+    'b-navbar-dropdown': NavbarDropdown
+    // 'b-login-btn': LoginBtn
   }
 }).$mount('#app')
