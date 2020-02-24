@@ -1,6 +1,6 @@
 <template>
   <section>
-    <button class="button is-primary is-medium"
+    <button class="button is-light"
             @click="isComponentModalActive = true">
       Log in
     </button>
@@ -17,7 +17,6 @@
 
 <script>
 import LoginForm from './LoginForm'
-import firebase from '../firebase.js'
 
 export default {
   name: 'LoginBtn',
@@ -31,15 +30,6 @@ export default {
         email: '',
         password: ''
       }
-    }
-  },
-  methods: {
-    login () {
-      firebase.auth().signInWithEmailAndPassword(this.email, this.password).catch(function (error) {
-        const errorCode = error.code
-        const errorMessage = error.message
-        console.log(errorCode, errorMessage)
-      })
     }
   }
 }

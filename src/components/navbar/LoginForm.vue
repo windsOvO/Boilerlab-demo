@@ -28,20 +28,48 @@
       </section>
       <footer class="modal-card-foot">
         <button class="button" type="button" @click="$parent.close()">Close</button>
-        <button class="button is-primary">Login</button>
+        <button class="button is-primary" @click="login">Login</button>
       </footer>
     </div>
   </form>
 </template>
-
+<!--use modal form-->
 <script>
-// use modal form
+import firebase from '../../firebase'
 
 export default {
   name: 'LoginForm',
-  props: {
-    email: String,
-    password: String
+  data () {
+    return {
+      email: '2315543036@qq.com',
+      password: '20001020cl'
+    }
+  },
+  methods: {
+    login () {
+      console.log('231')
+
+      setTimeout(function () {
+        console.log('231')
+      }, 1000)
+      firebase.auth().signInWithEmailAndPassword(this.email, this.password)
+        .then(res => {
+          // const user = firebase.auth().currentUser
+          // const user = { displayName: 'Lang' }
+          console.log(res.user)
+          // if (res) {
+          //   this.$router.push({
+          //     path: '/login',
+          //     query: { user: res.displayName }
+          //   })
+          // }
+        })
+        .catch(function (error) {
+          const errorCode = error.code
+          const errorMessage = error.message
+          console.log(errorCode, errorMessage)
+        })
+    }
   }
 }
 </script>
