@@ -1,6 +1,6 @@
 <template>
   <section>
-    <b-field label="socre">
+    <b-field label="score">
       <b-input v-model="score"></b-input>
     </b-field>
   </section>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-tag type="is-large">{{$route.query.user}}</b-tag>
+    <b-tag type="is-large">{{$store.state.userInfo.name}}</b-tag>
     <button class="button is-primary" @click="logout">
       Log out
     </button>
@@ -14,8 +14,10 @@ export default {
   name: 'LogoutBtn',
   methods: {
     logout () {
-      firebase.auth().signOut().then(function () {
+      // 不能用function(), 会导致this === null
+      firebase.auth().signOut().then(() => {
         this.$router.push('/')
+        this.$store.commit('clearUserInfo')
       }).catch(function (error) {
         console.log(error)
       })

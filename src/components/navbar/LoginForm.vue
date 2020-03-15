@@ -27,9 +27,10 @@
         <b-checkbox>Remember me</b-checkbox>
       </section>
       <footer class="modal-card-foot">
-        <button class="button" type="button" @click="$parent.close()">Close</button>
-        <button class="button is-primary" @click="login">Login</button>
+        <b-button class="button" type="button" @click="$parent.close()">Close</b-button>
+        <b-button class="button is-primary" @click="login">Login</b-button>
       </footer>
+<!--      button改为b-button解决click无法setTimeout的问题-->
     </div>
   </form>
 </template>
@@ -41,30 +42,53 @@ export default {
   name: 'LoginForm',
   data () {
     return {
-      email: '2315543036@qq.com',
-      password: '20001020cl'
+      email: 'windszzlang@gmail.com',
+      // email: 'ta3@boilerlab.com',
+      password: '123456'
     }
   },
   methods: {
-    login () {
-      console.log('231')
-
-      setTimeout(function () {
-        console.log('231')
-      }, 1000)
+    // get name and other info through email from firestore
+    getUserInfo (email) {
+      return new Promise(resolve => {
+        const db = firebase.firestore()
+        db.collection('users').where('email', '==', email)
+          .get()
+          .then(query => {
+            query.forEach(doc => {
+              resolve({
+                name: doc.data().name,
+                section: doc.data().section
+              })
+            })
+          })
+          .catch(err => console.log('Error getting documents:', err))
+      })
+    },
+    // login and authorization with firebase
+    async login () {
       firebase.auth().signInWithEmailAndPassword(this.email, this.password)
         .then(res => {
-          // const user = firebase.auth().currentUser
-          // const user = { displayName: 'Lang' }
-          console.log(res.user)
-          // if (res) {
-          //   this.$router.push({
-          //     path: '/login',
-          //     query: { user: res.displayName }
-          //   })
-          // }
+          this.getUserInfo(res.user.email)
+            .then(info => {
+              // console.log(info)
+              const userInfo = {
+                email: res.user.email,
+                name: info.name,
+                section: info.section
+              }
+              console.log(userInfo)
+              this.$store.commit('setUserInfo', userInfo)
+              this.$router.push({
+                path: '/home'
+                // query: {
+                //   user: info.name,
+                //   section: info.section
+                // }
+              })
+            })
         })
-        .catch(function (error) {
+        .catch(error => {
           const errorCode = error.code
           const errorMessage = error.message
           console.log(errorCode, errorMessage)

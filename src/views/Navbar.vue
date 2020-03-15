@@ -6,31 +6,27 @@
       </b-navbar-item>
     </template>
     <template slot="start">
-      <b-navbar-item href="#">
+      <b-navbar-item @click="goHome">
         Home
       </b-navbar-item>
       <b-navbar-item href="#">
         Documentation
       </b-navbar-item>
-      <b-navbar-dropdown label="Info">
-        <b-navbar-item href="#">
-          About
-        </b-navbar-item>
-        <b-navbar-item href="#">
-          Contact
-        </b-navbar-item>
-      </b-navbar-dropdown>
+      <info></info>
+      <!--        labs selection dropdown in details-->
+      <router-view name="dropdown"></router-view>
     </template>
-
     <template slot="end">
       <b-navbar-item tag="div">
-        <router-view></router-view>
+        <router-view name="btn"></router-view>
       </b-navbar-item>
     </template>
   </b-navbar>
 </template>
 
 <script>
+import Info from '../components/navbar/Info'
+
 const props = {
   transparent: {
     type: Boolean,
@@ -74,7 +70,15 @@ const props = {
 
 export default {
   name: 'Navbar',
-  props: props
+  props: props,
+  components: {
+    info: Info
+  },
+  methods: {
+    goHome () {
+      this.$router.push('/home')
+    }
+  }
 }
 </script>
 

@@ -1,25 +1,17 @@
 <template>
   <div id="app">
-    <main-navbar></main-navbar>
-    <section class="hero is-link is-fullheight-with-navbar is-bold is-primary">
-      <div class="hero-body">
-        <div class="container is-fluid">
-          <stu-board></stu-board>
-        </div>
-      </div>
-    </section>
+    <bl-navbar></bl-navbar>
+    <router-view name="main"></router-view>
   </div>
 </template>
 
 <script>
-import Navbar from './components/navbar/Navbar'
-import StuBoard from './components/mainview/StuBoard'
+import Navbar from './views/Navbar'
 
 export default {
   name: 'App',
   components: {
-    'main-navbar': Navbar,
-    'stu-board': StuBoard
+    'bl-navbar': Navbar
   },
   data () {
     return {

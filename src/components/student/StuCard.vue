@@ -19,7 +19,7 @@
       </div>
     </div>
     <footer class="card-footer">
-      <a href="#" class="card-footer-item">Details</a>
+      <a @click="visitDetails" class="card-footer-item">Details</a>
       <a href="#" class="card-footer-item">Complete</a>
     </footer>
   </div>
@@ -37,8 +37,11 @@ export default {
     }
   },
   methods: {
-    grade () {
-      this.step++
+    visitDetails () {
+      this.$router.push({
+        path: '/details',
+        query: { name: this.name }
+      })
     }
   }
 }

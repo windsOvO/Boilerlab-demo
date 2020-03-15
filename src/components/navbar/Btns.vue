@@ -10,7 +10,7 @@ import LoginBtn from './LoginBtn'
 import RegisterBtn from './RegisterBtn'
 
 export default {
-  name: 'StartBtns',
+  name: 'Btns',
   components: {
     'login-btn': LoginBtn,
     'register-btn': RegisterBtn
